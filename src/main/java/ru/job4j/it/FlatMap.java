@@ -16,7 +16,11 @@ public class FlatMap<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return readFirstNotEmptyValue();
+        while (!cursor.hasNext() && data.hasNext()) {
+            cursor = data.next();
+        }
+
+        return cursor.hasNext();
     }
 
     @Override
@@ -39,14 +43,4 @@ public class FlatMap<T> implements Iterator<T> {
             System.out.println(flat.next());
         }
     }
-
-    private boolean readFirstNotEmptyValue() {
-
-        while (!cursor.hasNext() && data.hasNext()) {
-            cursor = data.next();
-        }
-
-        return cursor.hasNext();
-    }
-
 }
