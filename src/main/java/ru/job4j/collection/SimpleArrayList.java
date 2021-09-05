@@ -19,13 +19,7 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (container.length == size) {
-            T[] newContainer = (T[]) new Object[size * 2];
-            System.arraycopy(container,
-                    0,
-                    newContainer,
-                    0,
-                    container.length);
-            container = newContainer;
+            increaseArrayLength();
         }
 
         container[size++] = value;
@@ -33,8 +27,8 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     @Override
-    public T set(int index, T newValue) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, container.length);
+    public T set(int index, T newValue) {
+        Objects.checkIndex(index, size);
 
         T oldValue = container[index];
         container[index] = newValue;
@@ -42,8 +36,8 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     @Override
-    public T remove(int index) throws IndexOutOfBoundsException {
-        Objects.checkIndex(index, container.length);
+    public T remove(int index) {
+        Objects.checkIndex(index, size);
 
         T removedValue = container[index];
 
@@ -62,7 +56,7 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     @Override
-    public T get(int index) throws IndexOutOfBoundsException {
+    public T get(int index) {
         Objects.checkIndex(index, container.length);
 
         return container[index];
@@ -73,6 +67,10 @@ public class SimpleArrayList<T> implements List<T> {
         return this.size;
     }
 
+    private void increaseArrayLength() {
+        container = Arrays.copyOf(container, container.length * 2);
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -80,26 +78,16 @@ public class SimpleArrayList<T> implements List<T> {
             private int cursor;
 
             @Override
-            public boolean hasNext() throws ConcurrentModificationException {
+            public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
 
-                boolean result = false;
-
-                for (int index = cursor; cursor < size; index++) {
-                    T value = container[cursor];
-                    if (value != null) {
-                        result = true;
-                        break;
-                    }
-                }
-
-                return result;
+                return cursor < size;
             }
 
             @Override
-            public T next() throws ConcurrentModificationException {
+            public T next() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
@@ -110,7 +98,6 @@ public class SimpleArrayList<T> implements List<T> {
 
                 return container[cursor++];
             }
-
         };
     }
 }
