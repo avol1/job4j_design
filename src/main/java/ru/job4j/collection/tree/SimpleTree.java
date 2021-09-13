@@ -14,13 +14,9 @@ public class SimpleTree<E> implements Tree<E> {
     public boolean add(E parent, E child) {
         boolean rsl = false;
 
-        if (findBy(child).isPresent()) {
-            return false;
-        }
-
         var node = findBy(parent);
 
-        if (node.isEmpty()) {
+        if (findBy(child).isPresent() || node.isEmpty()) {
             return false;
         }
 
