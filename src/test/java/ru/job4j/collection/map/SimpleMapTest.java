@@ -28,6 +28,16 @@ public class SimpleMapTest {
     }
 
     @Test
+    public void whenRecordAlreadyExist() {
+        SimpleMap<Integer, String> map = new SimpleMap<>();
+
+        map.put(1, "Test1");
+        map.put(2, "Test2");
+
+        assertFalse(map.put(1, "Test"));
+    }
+
+    @Test
     public void whenAddTwoRecordAndRemoveOneInMap() {
         SimpleMap<Integer, String> map = new SimpleMap<>();
 
