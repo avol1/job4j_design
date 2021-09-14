@@ -16,12 +16,12 @@ public class SimpleTree<E> implements Tree<E> {
 
         var node = findBy(parent);
 
-        if (findBy(child).isPresent() || node.isEmpty()) {
-            return false;
+        if (node.isPresent() && findBy(child).isEmpty()) {
+            node.get().children.add(new Node<>(child));
+            rsl = true;
         }
 
-        node.get().children.add(new Node<>(child));
-        return true;
+        return rsl;
     }
 
     @Override
