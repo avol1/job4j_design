@@ -58,6 +58,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
         for (int i = 0; i < oldCapacity; i++) {
             MapEntry<K, V> entry = table[i];
+
+            if (entry == null) {
+                continue;
+            }
             int index = indexFor(entry.key);
 
             newTable[index] = entry;
