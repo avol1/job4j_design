@@ -9,21 +9,24 @@ public class Analize {
         int changed = 0;
         int deleted = 0;
 
-        HashSet<User> mergedSet = new HashSet<>();
-        mergedSet.addAll(current);
-        mergedSet.addAll(previous);
+        List<User> mergedList = new ArrayList<>();
+        mergedList.addAll(current);
+        mergedList.addAll(previous);
 
-        Iterator<User> it = mergedSet.iterator();
+        HashMap<Integer, User> usersMap = new HashMap<>();
+
+        Iterator<User> it = mergedList.iterator();
 
         while (it.hasNext()) {
             User user = it.next();
 
             if (previous.contains(user) && current.contains(user)) {
-                User prevUser = previous.stream()
-                        .filter(prev -> prev.equals(user))
-                        .findFirst()
-                        .orElse(null);
-                if (!Objects.equals(user.getName(), prevUser.getName())) {
+                User userInMap = usersMap.get(user.getId());
+                if (userInMap == null) {
+                    usersMap.put(user.getId(), user);
+                    continue;
+                }
+                if (!userInMap.getName().equals(user.getName())) {
                     changed += 1;
                 }
             } else if (previous.contains(user)) {
@@ -33,7 +36,9 @@ public class Analize {
             }
         }
 
-        return new Info(added, changed, deleted);
+        return new
+
+                Info(added, changed, deleted);
     }
 
 }
