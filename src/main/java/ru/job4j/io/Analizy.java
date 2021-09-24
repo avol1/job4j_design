@@ -15,12 +15,10 @@ public class Analizy {
 
             StringBuilder builder = new StringBuilder();
             boolean errorFind = false;
+            String line;
 
-            List<String> lines = in.lines().collect(Collectors.toList());
-
-            for (String line : lines) {
+            while ((line = in.readLine()) != null) {
                 String[] values = line.split(" ");
-
                 String code = values[0];
                 String time = values[1];
 
