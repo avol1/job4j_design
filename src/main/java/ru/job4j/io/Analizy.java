@@ -15,10 +15,9 @@ public class Analizy {
 
             StringBuilder builder = new StringBuilder();
             boolean errorFind = false;
-            String line;
 
-            while ((line = in.readLine()) != null) {
-                String[] values = line.split(" ");
+            while (in.ready()) {
+                String[] values = in.readLine().split(" ");
                 String code = values[0];
                 String time = values[1];
 
