@@ -9,7 +9,7 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     Set<FileProperty> foundFiles = new HashSet<>();
-    Set<FileProperty> duplicates = new HashSet<>();
+    List<FileProperty> duplicates = new ArrayList<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
@@ -23,7 +23,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         return super.visitFile(file, attrs);
     }
 
-    public Set<FileProperty> getDuplicates() {
+    public List<FileProperty> getDuplicates() {
         return duplicates;
     }
 }
