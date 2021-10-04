@@ -37,9 +37,7 @@ public class Zip {
         }
     }
 
-    public static void main(String[] args) {
-        ArgsName params = ArgsName.of(args);
-
+    public static void validateArgs(ArgsName params) throws IllegalArgumentException {
         String directory = params.get(DIRECTORY);
         String exclude = params.get(EXCLUDE);
         String output = params.get(OUTPUT);
@@ -58,9 +56,19 @@ public class Zip {
         if (!fileDirectory.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", fileDirectory.getAbsoluteFile()));
         }
+    }
+
+    public static void main(String[] args) {
+        ArgsName params = ArgsName.of(args);
+
+        validateArgs(params);
+
+        String directory = params.get(DIRECTORY);
+        String exclude = params.get(EXCLUDE);
+        String output = params.get(OUTPUT);
 
         try {
-            List<Path> paths = Search.search(Paths.get("./"), path -> !path.toFile().getName().endsWith(exclude));
+            List<Path> paths = Search.search(Paths.get(directory), path -> !path.toFile().getName().endsWith(exclude));
             packFiles(paths, new File(output));
         } catch (IOException e) {
             e.printStackTrace();
