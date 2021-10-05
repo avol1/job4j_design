@@ -82,9 +82,9 @@ public class ConsoleChat {
         boolean result = isStopped;
 
        if (input.equals(STOP)) {
-           isStopped = true;
+           result = true;
        } else if (input.equals(CONTINUE)) {
-           isStopped = false;
+           result = false;
        }
 
         return result;
