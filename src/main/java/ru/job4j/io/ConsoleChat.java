@@ -79,11 +79,15 @@ public class ConsoleChat {
     }
 
     private boolean stopAnswerByInput(String input) {
-        return switch (input) {
-            case STOP -> true;
-            case CONTINUE -> false;
-            default -> isStopped;
-        };
+        boolean result = isStopped;
+
+       if (input.equals(STOP)) {
+           isStopped = true;
+       } else if (input.equals(CONTINUE)) {
+           isStopped = false;
+       }
+
+        return result;
     }
 
     public static void main(String[] args) {
