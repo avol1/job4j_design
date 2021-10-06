@@ -40,7 +40,7 @@ public class CSVReaderTest {
     }
 
     @Test(expected = Exception.class)
-    public void WhenOutFileIsNotValid() throws Exception {
+    public void whenOutFileIsNotValid() throws Exception {
         File file = temporaryFolder.newFile("source.csv");
 
         ArgsName argsName = ArgsName.of(new String[]{
@@ -51,7 +51,7 @@ public class CSVReaderTest {
     }
 
     @Test
-    public void WhenFilterIsEmptyThenReturnALl() throws Exception {
+    public void whenFilterIsEmptyThenReturnAll() throws Exception {
         String data = String.join(
                 System.lineSeparator(),
                 "name;age;last_name;education",
