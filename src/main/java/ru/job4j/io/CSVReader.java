@@ -2,14 +2,13 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
 public class CSVReader {
     public static final String STD_OUT = "stdout";
 
-    public static void handle(ArgsName argsName) throws Exception {
+    public void handle(ArgsName argsName) throws Exception {
         validateArgs(argsName);
 
         String source = argsName.get("path");
@@ -63,7 +62,7 @@ public class CSVReader {
         handleOut(target, insertData.toString());
     }
 
-    private static void validateArgs(ArgsName argsName) throws Exception {
+    private void validateArgs(ArgsName argsName) throws IllegalArgumentException {
         String source = argsName.get("path");
         String delimiter = argsName.get("delimiter");
         String target = argsName.get("out");
@@ -91,7 +90,7 @@ public class CSVReader {
         }
     }
 
-    private static void handleOut(String target, String data) throws Exception {
+    private void handleOut(String target, String data) throws Exception {
         if (target.equals(STD_OUT)) {
             System.out.println(data);
         } else {
@@ -102,7 +101,7 @@ public class CSVReader {
     public static void main(String[] args) {
         ArgsName argsName = ArgsName.of(args);
         try {
-            CSVReader.handle(argsName);
+            new CSVReader().handle(argsName);
         } catch (Exception e) {
             e.printStackTrace();
         }

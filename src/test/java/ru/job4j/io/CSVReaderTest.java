@@ -35,7 +35,7 @@ public class CSVReaderTest {
                 "Jack;25",
                 "William;30"
         ).concat(System.lineSeparator());
-        CSVReader.handle(argsName);
+        new CSVReader().handle(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath()));
     }
 
@@ -47,7 +47,7 @@ public class CSVReaderTest {
                 "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=" + "error.csbv", "-filter=name,age"
         });
 
-        CSVReader.handle(argsName);
+        new CSVReader().handle(argsName);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CSVReaderTest {
                 "Jack;25;Johnson;Undergraduate",
                 "William;30;Brown;Secondary special"
         ).concat(System.lineSeparator());
-        CSVReader.handle(argsName);
+        new CSVReader().handle(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath()));
     }
 
