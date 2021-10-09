@@ -27,16 +27,13 @@ public class CSVReader {
                 header = "";
 
                 for (int i = 0; i < columns.length; i++) {
-                    if (filterNames.isEmpty() || filterNames.contains(columns[i])) {
+                    if (filterNames.contains(columns[i])) {
                         filterIndex.add(i);
                         header = header.equals("") ? columns[i] : header + delimiter + columns[i];
                     }
                 }
 
                 insertData.append(header.concat(System.lineSeparator()));
-            }
-            if (filterIndex.isEmpty()) {
-                throw new IllegalArgumentException("Не удалось определить поля для записи");
             }
 
             while (scanner.hasNext()) {
