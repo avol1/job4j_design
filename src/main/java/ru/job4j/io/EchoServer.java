@@ -32,7 +32,7 @@ public class EchoServer {
                             } else if (parameter.equals(HELLO)) {
                                 out.write("Hello".getBytes());
                             } else {
-                                out.write(parameter.getBytes());
+                                out.write("What".getBytes());
                             }
                         }
                         System.out.println(str);
