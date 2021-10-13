@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <name>ООО Ромашка</name>
+    <id>1</id>
+    <isActive>true</isActive>
+    <bpContact>
+        <zipCode>123</zipCode>
+        <phone>9999999999</phone>
+    </bpContact>
+    <oldNames>ООО Ромашка old</oldNames>
+</root>
