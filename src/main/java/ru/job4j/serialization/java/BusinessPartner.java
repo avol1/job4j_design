@@ -1,5 +1,7 @@
 package ru.job4j.serialization.java;
 
+import org.json.JSONObject;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -36,6 +38,26 @@ public class BusinessPartner {
         this.oldNames = oldNames;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public Contact getBpContact() {
+        return bpContact;
+    }
+
+    public String[] getOldNames() {
+        return oldNames;
+    }
+
     @Override
     public String toString() {
         return "BusinessPartner{"
@@ -57,21 +79,7 @@ public class BusinessPartner {
         BusinessPartner partner = new BusinessPartner("ООО Ромашка", 1, true,
                 new Contact(123, "9999999999"), new String[]{"ООО Ромашка old"});
 
-        JAXBContext context = JAXBContext.newInstance(BusinessPartner.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-        String xml = "";
-
-        try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(partner, writer);
-            xml = writer.getBuffer().toString();
-            System.out.println(xml);
-        }
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        try (StringReader reader = new StringReader(xml)) {
-            BusinessPartner result = (BusinessPartner) unmarshaller.unmarshal(reader);
-            System.out.println(result);
-        }
+        JSONObject jsonObject = new JSONObject(partner);
+        System.out.println(jsonObject.toString());
     }
 }
