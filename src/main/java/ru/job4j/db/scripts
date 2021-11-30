@@ -1,0 +1,12 @@
+create table clients(
+    id serial primary key,
+	last_name varchar(255),
+	first_name varchar(255),
+	is_married boolean
+);
+
+insert into clients(last_name, first_name, is_married) values('Ivanov', 'Ivan', true);
+
+update clients set is_married = false where last_name = 'Ivanov';
+
+delete from clients;
