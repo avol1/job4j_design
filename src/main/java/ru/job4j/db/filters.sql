@@ -12,9 +12,9 @@ SELECT *
 FROM product
 WHERE expired_date < CURRENT_DATE;
 -- Написать запрос, который выводит самый дорогой продукт.
-SELECT name, max(price)
-FROM product
-GROUP by name;
+SELECT name
+FROM ( SELECT name, price FROM product ORDER BY price DESC ) as prod
+LIMIT 1;
 -- Написать запрос, который выводит для каждого типа количество продуктов к нему принадлежащих. В виде имя_типа, количество
 SELECT t.name as имя_типа, COUNT(*) as количество
 FROM type as t
