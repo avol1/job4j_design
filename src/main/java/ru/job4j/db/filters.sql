@@ -24,7 +24,7 @@ GROUP by t.name;
 SELECT product.*
 FROM product
 INNER JOIN type ON product.type_id = type.id
-WHERE type.name IN ('СЭР', 'МОЛОКО');
+WHERE type.name IN ('СЫР', 'МОЛОКО');
 -- Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.
 SELECT t.name as имя_типа, COUNT(*) as количество
 FROM type as t
