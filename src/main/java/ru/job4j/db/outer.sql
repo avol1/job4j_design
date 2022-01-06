@@ -40,7 +40,7 @@ insert into teens(id, name, gender) values (1, 'Peter', 'M');
 insert into teens(id, name, gender) values (2, 'Ann', 'F');
 insert into teens(id, name, gender) values (3, 'Anton', 'M');
 
-SELECT * FROM teens t1 cross join teens t2;
+SELECT * FROM teens t1 cross join teens t2 where t1.gender <> t2.gender;
 
 
 
