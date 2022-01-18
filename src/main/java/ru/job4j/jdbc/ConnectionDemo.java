@@ -9,12 +9,11 @@ import java.sql.SQLException;
 
 public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost:5432/idea_db";
-
         Config cf = new Config("./src/main/resources/app.properties");
         cf.load();
 
+        Class.forName(cf.value("jdbc.driver"));
+        String url = cf.value("jdbc.db.url");
         String login = cf.value("jdbc.login");
         String password = cf.value("jdbc.password");
 
