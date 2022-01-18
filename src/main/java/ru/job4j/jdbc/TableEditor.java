@@ -1,7 +1,6 @@
 package ru.job4j.jdbc;
 
-import ru.job4j.io.Config;
-
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -97,7 +96,12 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws Exception {
-        TableEditor editor = new TableEditor(initProperties());
+        Properties properties = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader()
+                .getResourceAsStream("app.properties")) {
+            properties.load(in);
+        }
+        TableEditor editor = new TableEditor(properties);
 
         editor.createTable("sample_tab");
         System.out.println(getTableScheme(editor.connection, "sample_tab"));
@@ -111,22 +115,5 @@ public class TableEditor implements AutoCloseable {
 
         editor.close();
 
-    }
-
-    private static Properties initProperties() throws ClassNotFoundException {
-        Config cf = new Config("./src/main/resources/app.properties");
-        cf.load();
-
-        Class.forName(cf.value(JDBC_DRIVER));
-        String url = cf.value(JDBC_DB_URL);
-        String login = cf.value(JDBC_LOGIN);
-        String password = cf.value(JDBC_PASSWORD);
-
-        Properties properties = new Properties();
-        properties.put(JDBC_DB_URL, url);
-        properties.put(JDBC_LOGIN, login);
-        properties.put(JDBC_PASSWORD, password);
-
-        return properties;
     }
 }
